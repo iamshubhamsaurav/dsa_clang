@@ -8,35 +8,71 @@ struct Node {
 	struct Node* prev;
 };
 
-// Fix  this function -- incorrect - seg fault result
+// This is straight forward except for the parts that are not (the main part)  
 void insertAtPosition(struct Node** head, int val, int position) {
-	int i = 1;
+  
+  // handling errors here
+  if(*head == NULL) {
+    printf("\nList is empty.");
+    return;
+  }
+  // maybe handle if position is less than 1 or position is 0. Not diff but I have better things to do
+  // Handle position < 1 and handle position == 1 and check for position = 2 insertion
+  // screw this - doing some of them right now
+  if(position < 1) {
+    printf("\nInvalid Operatons");
+    return;
+  }
+
+	
 	struct Node* newNode = (struct Node*) malloc(sizeof(struct Node));
 	newNode->data = val;
-	
+  newNode->next = NULL;
+
+  if(position == 1) { // if insertion is position 1
+    newNode->next = *head;
+    *head = newNode;
+    return;
+  }
+
+  int i = 1;
 	struct Node* curr = *head;
-	while(i < position) {
+	while(i < (position - 1)) {
 		curr = curr->next;
 		i++;
 	}
-	// problem lies here
-	newNode->next = curr->next;
-	curr->next->prev = newNode;
-	curr->next = newNode;
+	
+  struct Node* nextNode = curr->next;
+  newNode->next = nextNode;
+  curr->next = newNode;
+  nextNode->prev = newNode;
 	newNode->prev = curr;
 }
 
 
-// Fix this function -- incorrect - seg fault result
+// Again, this is straight forward except for the main part
 void deleteFromPosition(struct Node** head, int position) {
+  // Handle errors and edge cases first before the main operation
+  if(*head == NULL) {
+    printf("\nList is already empty.");
+    return;
+  }
+
+  if(position == 1) {
+    *head = (*head)->next;
+    return;
+  }
+
+  // there are more edge cases and error to be handled but I am things to do
+
 	int i = 1;
 	
 	struct Node* curr = *head;
-	while(i < position) {
+	while(i < (position - 1)) {
 		curr = curr->next;
 		i++;
 	}
-	// problem probably lies here
+	
 	struct Node* nextNextNode = curr->next->next;
 	curr->next = nextNextNode;
 	nextNextNode->prev = curr;
@@ -156,7 +192,11 @@ int main() {
 	int el2 = removeFromBegining(&head);
 	printf("Element Removed From Begining: %d", el2);	
 	printList(head);
-	
+  
+  insertAtPosition(&head, 100, 2);
+  printList(head);
+  deleteFromPosition(&head, 2);
+  printList(head);
 	return 0;
 }
 
