@@ -23,7 +23,7 @@ void insertAtPosition(struct Node **head, int val, int position)
 	// screw this - doing some of them right now
 	if (position < 1)
 	{
-		printf("\nInvalid Operatons");
+		printf("\nInvalid Position");
 		return;
 	}
 
@@ -53,7 +53,7 @@ void insertAtPosition(struct Node **head, int val, int position)
 	newNode->prev = curr;
 }
 
-// Again, this is straight forward except for the main part
+// Again, this is straight forward except for the parts that aren't
 void deleteFromPosition(struct Node **head, int position)
 {
 	// Handle errors and edge cases first before the main operation
@@ -69,7 +69,7 @@ void deleteFromPosition(struct Node **head, int position)
 		return;
 	}
 
-	// there are more edge cases and error to be handled but I am things to do
+	// there are more edge cases and error to be handled but I have other things to do
 
 	int i = 1;
 
@@ -83,6 +83,9 @@ void deleteFromPosition(struct Node **head, int position)
 	struct Node *nextNextNode = curr->next->next;
 	curr->next = nextNextNode;
 	nextNextNode->prev = curr;
+
+	// Some bug is still there in this function. Will fix when free -PS bug appears only during edge cases
+	// TODO: Fix the edge case problem (when deleting the element at the last position) 
 }
 
 void insertAtBegin(struct Node **head, int val)
@@ -174,7 +177,7 @@ int removeFromEnd(struct Node **head)
 	{
 		curr = curr->next;
 	}
-	int data = curr->data;
+	int data = curr->next->data;
 	curr->next = NULL;
 
 	return data;
@@ -188,24 +191,18 @@ int main()
 	insertAtBegin(&head, 16);
 
 	insertAtEnd(&head, 20);
-	// insertAtPosition(&head, 22, 4);
-	insertAtEnd(&head, 24);
-	insertAtEnd(&head, 26);
-	insertAtEnd(&head, 28);
+	insertAtPosition(&head, 22, 3);
 
 	printList(head);
 
 	int el1 = removeFromEnd(&head);
-	printf("Element Removed From End: %d", el1);
-	printList(head);
+	printf("\nElement Removed From End: %d", el1);
+	//printList(head);
 
 	int el2 = removeFromBegining(&head);
-	printf("Element Removed From Begining: %d", el2);
-	printList(head);
-
-	insertAtPosition(&head, 100, 2);
-	printList(head);
-	deleteFromPosition(&head, 2);
+	printf("\nElement Removed From Begining: %d", el2);
+	//printList(head);
+	deleteFromPosition(&head, 1);
 	printList(head);
 	return 0;
 }
