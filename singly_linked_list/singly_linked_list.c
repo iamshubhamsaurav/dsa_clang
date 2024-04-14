@@ -59,7 +59,7 @@ void insertAtEnd(struct Node **head, int data)
 {
 
     // (struct Node*) is the type casting
-    // malloc(sizeof(struct Node)) will allocate of size Node
+    // malloc(sizeof(struct Node)) will allocate memory of size Node
     struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
 
     // Save the data in the newNode
@@ -155,9 +155,16 @@ int main()
 
     printList(head);
     printf("\n");
-    // removeFromBeginning(&head);
-    // removeFromEnd(&head);
-    removeFromPosition(&head, 5);
+    printf("***");
+    removeFromBeginning(&head);
+    printf("*removeFromBeginning**");
+    printList(head);
+    insertAtBeginning(&head, 3);
+    insertAtEnd(&head, 4);
+    printList(head);
+    removeFromEnd(&head);
+    removeFromPosition(&head, 2);
+    printf("**end*");
     printList(head);
     return 0;
 }
