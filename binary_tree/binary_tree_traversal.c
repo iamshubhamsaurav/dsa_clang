@@ -3,6 +3,7 @@
 */
 
 #include<stdio.h>
+#include<stdlib.h>
 
 struct Node {
     int data;
@@ -32,26 +33,29 @@ void inOrderTraversal(struct Node* root) {
 }
 
 
+int INDEX = -1;
+struct Node* buildTreePreOrder(int nodes[]) {
+    INDEX++;
+    if (nodes[INDEX] == -1) {
+        return NULL;
+    }
+    
+    struct Node *root = (struct Node*) malloc(sizeof(struct Node));
+    root->data = nodes[INDEX];
+
+    root->left = buildTreePreOrder(nodes);
+    root->right = buildTreePreOrder(nodes);
+
+    return root; 
+}
+
+
 int main() {
 
-    struct Node* root = (struct Node*) malloc(sizeof(struct Node));
-    root->data = 1;
-    root->left = NULL;
-    root->right = NULL;
-
-    struct Node* leftNode = (struct Node*) malloc(sizeof(struct Node));
-    leftNode->data = 2;
-    leftNode->left = NULL;
-    leftNode->right = NULL;
-
-    root->left = leftNode;
+    struct Node* root = NULL;
     
-    struct Node* rightNode = (struct Node*) malloc(sizeof(struct Node));;
-    rightNode->data = 3;
-    rightNode->left = NULL;
-    rightNode->right = NULL;
-
-    root->right = rightNode;
+    int nodes[] =  {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
+    root = buildTreePreOrder(nodes);
 
     printf("\n Pre Order Traversal\n");
     preOrderTraversal(root);
