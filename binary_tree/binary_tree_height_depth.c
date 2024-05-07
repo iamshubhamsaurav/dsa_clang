@@ -53,6 +53,24 @@ int height(struct Node* root) {
     return max(leftHeight, rightHeight) + 1;
 }
 
+
+// DO NOT WRITE MIN AND DEPTH FUNCTION - leave space, its not working
+int min(int n1, int n2) {
+    if(n1 < n2) return n1;
+    else return n2;
+}
+
+int depth(struct Node* root, int data, int res) {
+    if(root == NULL) return 0;
+
+    if(root->data == data) return res;
+
+    int left = depth(root, data, res + 1);
+    if(left != 0) return left;
+    return depth(root, data, res + 1);
+    
+}
+
 int main() {
 
     struct Node* root = NULL;
@@ -61,5 +79,7 @@ int main() {
     preOrderTraversal(root);
     int h = height(root);
     printf("\nHeight of tree: %d", h);   
+    int d = depth(root, 5, 1);
+    printf("\nDepth of 5 is %d", d);
     return 0;
 }
