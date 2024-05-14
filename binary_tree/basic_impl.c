@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 
 struct Node {
@@ -30,6 +31,28 @@ void preOrderTraversal(struct Node* root) {
     preOrderTraversal(root->right);
 }
 
+int search(struct Node* root, int key) {
+    if (root == NULL) {
+        return 0;
+    }
+
+    if (root->data == key) {
+        return 1; // 1 means the element was found
+    }
+    int leftTreeResult = search(root->left, key);
+    if(leftTreeResult == 1) {
+        return leftTreeResult;
+    }
+
+
+    int rightTreeResult = search(root->right, key);
+    if(rightTreeResult == 1) {
+        return rightTreeResult;
+    }
+
+    return 0;
+}
+
 int main() {
 
     struct Node* root = NULL;
@@ -37,7 +60,11 @@ int main() {
     root = buildTreePreOrder(nodes);
     preOrderTraversal(root);
     
+    int does10Exist = search(root, 10);
+    printf("\nDoes 10 exist in tree? %d", does10Exist);
 
+    int does5Exist = search(root, 5);
+    printf("\nDoes 5 exist in the tree? %d", does5Exist);
     
 
 
