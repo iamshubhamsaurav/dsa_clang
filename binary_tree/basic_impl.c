@@ -53,6 +53,33 @@ int search(struct Node* root, int key) {
     return 0;
 }
 
+struct Node* insert(struct Node* root, int data) {
+    struct Node *newNode = (struct Node *) malloc(sizeof(struct Node));
+        newNode->data = data;
+        newNode->left = NULL;
+        newNode->right = NULL;
+    if(root == NULL) {
+        root = newNode;
+        return root;
+    } else if(root->left == NULL) {
+        root->left = newNode;
+        return root;
+    } else if (root->right == NULL) {
+        root->right = newNode;
+        return root;
+    } else {
+        if(root->left != NULL) {
+            root->left = insert(root->left, data);
+            return root;
+        } else {
+            root->right = insert(root->right, data);
+            return root;
+        }
+         
+    }
+    return root;
+}
+
 int main() {
 
     struct Node* root = NULL;
@@ -65,10 +92,15 @@ int main() {
 
     int does5Exist = search(root, 5);
     printf("\nDoes 5 exist in the tree? %d", does5Exist);
-    
 
-
-
+    // inserting elements pre order
+    printf("\nNew Tree\n");
+    struct Node* newRoot = NULL;
+    newRoot = insert(newRoot, 9);
+    newRoot = insert(newRoot, 1);
+    newRoot = insert(newRoot, 2);
+    newRoot = insert(newRoot, 6);
+    preOrderTraversal(newRoot);
 
     return 0;
 }
