@@ -71,6 +71,22 @@ int depth(struct Node* root, int data, int res) {
     
 }
 
+
+struct Node* invertTree(struct Node* root) {
+    if(root == NULL) {
+        return NULL;
+    }
+
+    struct Node* temp = root->left;
+    root->left = root->right;
+    root->right = temp;
+
+    invertTree(root->left);
+    invertTree(root->right);
+    return root;
+}
+
+
 int main() {
 
     struct Node* root = NULL;
@@ -79,7 +95,13 @@ int main() {
     preOrderTraversal(root);
     int h = height(root);
     printf("\nHeight of tree: %d", h);   
-    int d = depth(root, 5, 1);
-    printf("\nDepth of 5 is %d", d);
+    // int d = depth(root, 5, 1);
+    // printf("\nDepth of 5 is %d", d);
+    
+    // Invert the tree - recursively swapping the left and right till the end
+    root = invertTree(root);
+    printf("\n");
+    preOrderTraversal(root);
+ 
     return 0;
 }
