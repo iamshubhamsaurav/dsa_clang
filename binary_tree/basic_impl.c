@@ -82,25 +82,34 @@ struct Node* insert(struct Node* root, int data) {
 
 int main() {
 
-    struct Node* root = NULL;
-    int nodes[] =  {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
-    root = buildTreePreOrder(nodes);
-    preOrderTraversal(root);
+    // struct Node* root = NULL;
+    // int nodes[] =  {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
+    // root = buildTreePreOrder(nodes);
+    // preOrderTraversal(root);
     
-    int does10Exist = search(root, 10);
-    printf("\nDoes 10 exist in tree? %d", does10Exist);
+    // int does10Exist = search(root, 10);
+    // printf("\nDoes 10 exist in tree? %d", does10Exist);
 
-    int does5Exist = search(root, 5);
-    printf("\nDoes 5 exist in the tree? %d", does5Exist);
+    // int does5Exist = search(root, 5);
+    // printf("\nDoes 5 exist in the tree? %d", does5Exist);
 
     // inserting elements pre order
     printf("\nNew Tree\n");
     struct Node* newRoot = NULL;
-    newRoot = insert(newRoot, 9);
     newRoot = insert(newRoot, 1);
     newRoot = insert(newRoot, 2);
+    newRoot = insert(newRoot, 3);
+    newRoot = insert(newRoot, 4);
+    newRoot = insert(newRoot, 5);
     newRoot = insert(newRoot, 6);
+    newRoot = insert(newRoot, 7);
     preOrderTraversal(newRoot);
+
+    printf("\nRoot: %d", newRoot->data);
+    printf("\nLevel 1: Left: %d \t\t\tRight: %d", newRoot->left->data, newRoot->right->data);
+    // printf("\n%d %d", newRoot->left->left->data, newRoot->left->right->data);
+    printf("\n%d %d", newRoot->left->left->left->data, newRoot->left->left->right->data);
+//    printf("\nLevel 2: Left-Left: %d, Left-Right:  %d \t, Right-Left: %d, Right-Right: %d", newRoot->left->left->data, newRoot->left->right->data, newRoot->right->left->data, newRoot->right->right->data);
 
     return 0;
 }
