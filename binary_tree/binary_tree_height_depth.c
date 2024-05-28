@@ -60,15 +60,22 @@ int min(int n1, int n2) {
     else return n2;
 }
 
-int depth(struct Node* root, int data, int res) {
-    if(root == NULL) return 0;
+int depth(struct Node* root, int data) {
 
-    if(root->data == data) return res;
+    // if root is null the return -1 -> because the tree does not exist
+    if (root == NULL) return -1;
 
-    int left = depth(root, data, res + 1);
-    if(left != 0) return left;
-    return depth(root, data, res + 1);
     
+    int distance = -1;
+
+    if(root->data == data) { // node found
+        return 0;
+    }
+
+    int leftDistance = depth(root->left, data);
+    int rightDistance = depth(root->right, data);
+
+    return max(leftDistance, rightDistance) + 1; // +1 for the root
 }
 
 
@@ -95,8 +102,8 @@ int main() {
     preOrderTraversal(root);
     int h = height(root);
     printf("\nHeight of tree: %d", h);   
-    // int d = depth(root, 5, 1);
-    // printf("\nDepth of 5 is %d", d);
+    int d = depth(root, 5);
+    printf("\nDepth of 5 is %d", d);
     
     // Invert the tree - recursively swapping the left and right till the end
     root = invertTree(root);
