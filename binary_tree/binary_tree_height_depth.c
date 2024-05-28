@@ -54,11 +54,17 @@ int height(struct Node* root) {
 }
 
 
-// DO NOT WRITE MIN AND DEPTH FUNCTION - leave space, its not working
-int min(int n1, int n2) {
-    if(n1 < n2) return n1;
-    else return n2;
-}
+/*
+Depth of a node
+The basic idea of depth is to find the distance between a node and the root node
+Algorithm:
+    if root is empty then return null
+    create a variable distance with the init value of -1
+    if node is found then return 0
+    else
+        go through left and right subtree recursively- don't worry about anything -> recursion will go the magic
+    return the distance + 1 (+ 1 beacause if we want to include the root in distance as well)
+*/
 
 int depth(struct Node* root, int data) {
 
@@ -66,12 +72,13 @@ int depth(struct Node* root, int data) {
     if (root == NULL) return -1;
 
     
-    int distance = -1;
+    int distance = -1; // distance init to -1
 
     if(root->data == data) { // node found
         return 0;
     }
 
+    // node not found - go through the left and right sub tree recursively
     int leftDistance = depth(root->left, data);
     int rightDistance = depth(root->right, data);
 
