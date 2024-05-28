@@ -1,9 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
 /*
     Stack Using Linked List
-    TODO: Push and Pop should run in constant time otherwise quit coding
 */
 
 struct Node
