@@ -96,6 +96,19 @@ int middleOddTerm(struct Node** head) {
     return -1;
 }
 
+int sumOfNodes(struct Node** head) {
+    if(*head == NULL) return -1;
+    struct Node* curr = *head;
+
+    int sum = 0;
+    while(curr != NULL) {
+        sum  = sum + curr->data;
+        curr = curr->next;
+    }
+
+    return sum;
+}
+
 // same as middleOddTerm - only the variable names and two operators have changed (!= changed to ==)
 int middleEvenTerm(struct Node** head) {
     if(*head == NULL) return -1;
@@ -154,5 +167,9 @@ int main() {
  
     printf("\nMiddle odd term: %d", middleOddTerm(&head));
     printf("\nMiddle even term: %d", middleEvenTerm(&head));
+
+    // Sum 
+    printf("\nSum of numbers: %d", sumOfNodes(&head));
+
     return 0;
 }
