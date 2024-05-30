@@ -7,19 +7,22 @@ struct Node {
 };
 
 void enqueue(struct Node** head, int data) {
-    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     newNode->data = data;
-    newNode->next = NULL;
-
+    newNode->next  = NULL;
 
     if(*head == NULL) {
         *head = newNode;
         return;
     }
 
-    newNode->next = *head;
-    *head = newNode;
-    return;
+    
+    struct Node* curr = *head;
+    while(curr->next != NULL) {
+        curr = curr->next;
+    }
+
+    curr->next = newNode;
 }
 
 int dequeue(struct Node** head) {
