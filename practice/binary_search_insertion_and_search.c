@@ -9,6 +9,26 @@ struct Node {
 };
 
 
+
+int minNodeUsingRecursion(struct Node* root) {
+    if(root == NULL) return -1;
+    if(root->left != NULL) {
+        return minNode(root->left);
+    } else {
+        return root->data;
+    }
+}
+
+int maxNodeUsingRecurion(struct Node* root) {
+    if(root == NULL) return -1;
+    if(root->right != NULL) {
+        return maxNode(root->right);
+    } else {
+        return root->data;
+    }
+}
+
+
 struct Node* insert(struct Node* root, int data) {
     if(root == NULL) {
         struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
@@ -68,5 +88,9 @@ int main() {
     search(root, 7);
     search(root, -2);
     search(root, 90);
+
+    printf("\nMin and Max Node: \n");
+    printf("\nMin Node: %d", minNodeUsingRecursion(root));
+    printf("\nMax Node: %d", maxNodeUsingRecurion(root));
     return 0;
 }
