@@ -58,6 +58,44 @@ void insertAtPosition(struct Node** head, int position, int data) {
     curr->next = newNode;
 }
 
+int deleteAtHead(struct Node** head) {
+    if(*head == NULL) return -1;
+    int data = (*head)->data;
+    *head = (*head)->next;
+    return data;
+}
+
+int deleteAtEnd (struct Node** head) {
+    if(*head == NULL) return -1;
+    struct Node* curr = *head;
+    while(curr->next->next != NULL) {
+        curr = curr->next;
+    }
+
+    int data = curr->next->data;
+    curr->next = NULL;
+    return data;
+}
+
+
+int deleteFromPosition(struct Node** head, int position) {
+    if(*head == NULL) return -1;
+
+    struct Node* curr = *head;
+    int index = 1;
+    while(index < position-1) {
+        curr = curr->next;
+        index++;
+    }
+
+    int data = curr->next->data;
+
+    curr->next = curr->next->next;
+
+    return data;
+}
+
+
 void display(struct Node* head) {
     struct Node* curr = head;
     while(curr != NULL) {
@@ -75,8 +113,16 @@ int main() {
     insertAtBegin(&head, 1);
     insertAtEnd(&head, 5);
  
-    insertAtPosition(&head, 3, -3);
+    // insertAtPosition(&head, 3, -3);
  
+    // display(head);
+
+    // printf("\nDeletion from head: %d", deleteAtHead(&head));
+    // display(head);
+    // printf("\nDeletion From End: %d", deleteAtEnd(&head));
+ 
+    display(head);
+    printf("\nDelete from position 3: %d", deleteFromPosition(&head, 3));
     display(head);
     return 0;
 }
