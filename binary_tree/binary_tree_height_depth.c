@@ -59,7 +59,6 @@ Depth of a node
 The basic idea of depth is to find the distance between a node and the root node
 Algorithm:
     if root is empty then return null
-    create a variable distance with the init value of -1
     if node is found then return 0
     else
         go through left and right subtree recursively- don't worry about anything -> recursion will go the magic
@@ -71,8 +70,6 @@ int depth(struct Node* root, int data) {
     // if root is null the return -1 -> because the tree does not exist
     if (root == NULL) return -1;
 
-    
-    int distance = -1; // distance init to -1
 
     if(root->data == data) { // node found
         return 0;
@@ -82,7 +79,14 @@ int depth(struct Node* root, int data) {
     int leftDistance = depth(root->left, data);
     int rightDistance = depth(root->right, data);
 
-    return max(leftDistance, rightDistance) + 1; // +1 for the root
+    if (leftDistance != -1) {
+      return leftDistance + 1;
+    } else if (rightDistance != -1) {
+      return rightDistance + 1;
+    } else {
+      return -1;
+    }
+
 }
 
 
