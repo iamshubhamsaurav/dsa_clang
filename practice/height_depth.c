@@ -10,15 +10,15 @@ struct Node {
 
 void inorder(struct Node* root) {
     if(root == NULL) return;
-    preorder(root->left);
+    inorder(root->left);
     printf("%d\n", root->data);
-    preorder(root->right);
+    inorder(root->right);
 }
 
 
 int max(int n1, int n2) {
     if(n1 > n2) return n1;
-    else n2;
+    else return n2;
 }
 
 
@@ -31,8 +31,21 @@ int height(struct Node* root) {
 }
 
 
-int depth(struct Node* root) {
-    
+int depth(struct Node* root, int data) {
+    if(root == NULL) {
+        return -1;
+    }
+
+    if(root->data == data) {
+        return 0;
+    }
+
+    int leftDistance = depth(root->left, data);
+    int rightDistance = depth(root->right, data);
+
+    if(leftDistance != -1) return leftDistance + 1;
+    else if (rightDistance != -1) return rightDistance + 1;
+    else return -1;  
 }
 
 int main() {
@@ -55,12 +68,20 @@ int main() {
 
     root->right = rightNode;
 
+    struct Node* rightLeftNode = (struct Node*)malloc(sizeof(struct Node));
+    rightLeftNode->data = 4;
+    rightLeftNode->left = NULL;
+    rightLeftNode->right = NULL;
+
+    root->right->left = rightLeftNode;
 
 
+    printf("\nHeight of tree: %d", height(root));
+    printf("\nDepth of %d is %d", 4, depth(root, 4));
 
 
-    printf("\nIn order:\n");
-    inorder(root);
+    // printf("\nIn order:\n");
+    // inorder(root);
 
     
     return 0;
