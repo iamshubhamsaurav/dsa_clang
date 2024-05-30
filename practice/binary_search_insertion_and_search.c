@@ -13,7 +13,7 @@ struct Node {
 int minNodeUsingRecursion(struct Node* root) {
     if(root == NULL) return -1;
     if(root->left != NULL) {
-        return minNode(root->left);
+        return minNodeUsingRecursion(root->left);
     } else {
         return root->data;
     }
@@ -22,10 +22,28 @@ int minNodeUsingRecursion(struct Node* root) {
 int maxNodeUsingRecurion(struct Node* root) {
     if(root == NULL) return -1;
     if(root->right != NULL) {
-        return maxNode(root->right);
+        return maxNodeUsingRecurion(root->right);
     } else {
         return root->data;
     }
+}
+
+int minValueUsingLoop(struct Node* root) {
+    if(root == NULL) return -1;
+    struct Node* curr = root;
+    while(curr->left != NULL) {
+        curr = curr->left;
+    }
+    return curr->data;
+}
+
+int maxValueUsingLoop(struct Node* root) {
+    if(root == NULL) return -1;
+    struct Node* curr = root;
+    while(curr->right != NULL) {
+        curr = curr->right;
+    }
+    return curr->data;
 }
 
 
@@ -92,5 +110,7 @@ int main() {
     printf("\nMin and Max Node: \n");
     printf("\nMin Node: %d", minNodeUsingRecursion(root));
     printf("\nMax Node: %d", maxNodeUsingRecurion(root));
+    printf("\nMin Node: %d", minValueUsingLoop(root));
+    printf("\nMax Node: %d", maxValueUsingLoop(root));
     return 0;
 }
