@@ -32,7 +32,7 @@ struct Node* insert(struct Node* root, int data) {
         return root;
     } else if (root->data < data) {
         root->right = insert(root->right, data);
-    } else if (root-> data) {
+    } else {
         root->left = insert(root->left, data);
     }
 
